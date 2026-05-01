@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Remote Voting Simulator | Multi-Agent System</title>
+  <meta name="description" content="A high-fidelity government prototype demonstrating multi-agent remote voting with fraud detection. Simulation only — not a real voting system." />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="bg-navy text-white font-sans">
+
+  <!-- HEADER -->
+  <header class="header-bar fixed top-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+      <div class="flex items-center gap-3">
+        <div class="emblem">&#9654;</div>
+        <div>
+          <p class="text-xs text-gold font-semibold tracking-widest uppercase">Government of India</p>
+          <h1 class="text-sm font-bold text-white leading-none">SecureVote Simulator</h1>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-gray-300">
+        <a href="#hero" class="hover:text-gold transition-colors">Home</a>
+        <a href="#about-agents" class="hover:text-gold transition-colors">Architecture</a>
+        <a href="#security" class="hover:text-gold transition-colors">Security</a>
+        <a href="#civic-connect-section" onclick="openCivicConnect()" class="hover:text-gold transition-colors" aria-label="Open Civic Connect module">Civic Connect</a>
+        <a href="#start" class="btn-gold text-xs px-4 py-2">Begin Simulation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero-section min-h-screen flex items-center justify-center pt-16">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <div class="sim-badge mb-6">SIMULATION PROTOTYPE · NOT A REAL VOTING SYSTEM</div>
+      <h2 class="font-serif text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
+        Secure Remote Voting<br/><span class="text-gold">Simulator</span>
+      </h2>
+      <p class="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed">
+        A multi-agent system prototype demonstrating fraud detection, identity verification, and eligibility checks for future-ready digital democracy.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#start" class="btn-gold text-sm px-8 py-4 font-semibold">Begin Voting Simulation</a>
+        <a href="#about-agents" class="btn-outline text-sm px-8 py-4 font-semibold">View Architecture</a>
+      </div>
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">AI Agents</div></div>
+        <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Simulated</div></div>
+        <div class="stat-card"><div class="stat-num">3-Tier</div><div class="stat-label">Verification</div></div>
+        <div class="stat-card"><div class="stat-num">WCAG</div><div class="stat-label">Accessible</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section id="about-agents" class="py-24 bg-navy-dark">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-3">System Architecture</p>
+        <h3 class="font-serif text-4xl font-bold text-white">Multi-Agent Pipeline</h3>
+        <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Each agent operates independently with defined inputs, processing logic, and outputs. Failure in any agent halts the pipeline.</p>
+      </div>
+      <div class="grid md:grid-cols-4 gap-0">
+        <div class="agent-card agent-1">
+          <div class="agent-num">01</div>
+          <div class="agent-icon">🛡️</div>
+          <h4 class="font-serif text-xl font-bold text-white mb-2">Eligibility Agent</h4>
+          <p class="text-gray-400 text-sm">Validates age (≥18) and state registration against current location.</p>
+          <div class="agent-io mt-4">
+            <div class="io-tag">IN: age, state, location</div>
+            <div class="io-tag">OUT: Eligible / Not Eligible</div>
+          </div>
+        </div>
+        <div class="agent-card agent-2">
+          <div class="agent-num">02</div>
+          <div class="agent-icon">🪪</div>
+          <h4 class="font-serif text-xl font-bold text-white mb-2">Identity Agent</h4>
+          <p class="text-gray-400 text-sm">Verifies Voter ID, OTP, and simulated face recognition.</p>
+          <div class="agent-io mt-4">
+            <div class="io-tag">IN: voterID, OTP, face</div>
+            <div class="io-tag">OUT: verified true/false</div>
+          </div>
+        </div>
+        <div class="agent-card agent-3">
+          <div class="agent-num">03</div>
+          <div class="agent-icon">🔍</div>
+          <h4 class="font-serif text-xl font-bold text-white mb-2">Fraud Detection Agent</h4>
+          <p class="text-gray-400 text-sm">Analyzes patterns for High / Medium / Low fraud risk signals.</p>
+          <div class="agent-io mt-4">
+            <div class="io-tag">IN: name, dob, state, ID</div>
+            <div class="io-tag">OUT: riskLevel, allowVoting</div>
+          </div>
+        </div>
+        <div class="agent-card agent-4">
+          <div class="agent-num">04</div>
+          <div class="agent-icon">🗳️</div>
+          <h4 class="font-serif text-xl font-bold text-white mb-2">Voting Agent</h4>
+          <p class="text-gray-400 text-sm">Presents ballot and records vote only if all agents approve.</p>
+          <div class="agent-io mt-4">
+            <div class="io-tag">IN: all agent results</div>
+            <div class="io-tag">OUT: receipt / blocked</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULATION AREA -->
+  <section id="start" class="py-24">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-3">Interactive Demo</p>
+        <h3 class="font-serif text-4xl font-bold text-white">Voting Simulation</h3>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="progress-bar-container mb-12" role="progressbar" aria-label="Simulation progress">
+        <div class="progress-steps">
+          <div class="prog-step active" id="prog-1" aria-label="Step 1: Eligibility Check">
+            <div class="prog-dot">1</div>
+            <span>Eligibility</span>
+          </div>
+          <div class="prog-line" id="line-1"></div>
+          <div class="prog-step" id="prog-2" aria-label="Step 2: Identity Verification">
+            <div class="prog-dot">2</div>
+            <span>Identity</span>
+          </div>
+          <div class="prog-line" id="line-2"></div>
+          <div class="prog-step" id="prog-3" aria-label="Step 3: Fraud Detection">
+            <div class="prog-dot">3</div>
+            <span>Fraud Check</span>
+          </div>
+          <div class="prog-line" id="line-3"></div>
+          <div class="prog-step" id="prog-4" aria-label="Step 4: Vote">
+            <div class="prog-dot">4</div>
+            <span>Vote</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANELS -->
+      <div id="panel-1" class="sim-panel active">
+        <div class="panel-header">
+          <div class="panel-badge">AGENT 01</div>
+          <h4 class="font-serif text-2xl font-bold text-white">Eligibility Verification</h4>
+          <p class="text-gray-400 text-sm mt-1">Enter your details to check voting eligibility</p>
+        </div>
+        <form id="form-eligibility" class="panel-body space-y-5" novalidate>
+          <div class="form-group">
+            <label for="age" class="form-label">Age <span class="text-gold">*</span></label>
+            <input type="number" id="age" name="age" placeholder="e.g. 25" min="1" max="120" class="form-input" aria-required="true"/>
+            <span class="form-hint">Must be 18 or above to vote</span>
+          </div>
+          <div class="form-group">
+            <label for="reg-state" class="form-label">Registered State <span class="text-gold">*</span></label>
+            <select id="reg-state" name="registeredState" class="form-input" aria-required="true">
+              <option value="">— Select State —</option>
+              <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option>
+              <option>Delhi</option><option>Goa</option><option>Gujarat</option>
+              <option>Haryana</option><option>Karnataka</option><option>Kerala</option>
+              <option>Madhya Pradesh</option><option>Maharashtra</option><option>Punjab</option>
+              <option>Rajasthan</option><option>Tamil Nadu</option><option>Telangana</option>
+              <option>Uttar Pradesh</option><option>West Bengal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="current-loc" class="form-label">Current Location (State) <span class="text-gold">*</span></label>
+            <select id="current-loc" name="currentLocation" class="form-input" aria-required="true">
+              <option value="">— Select Current State —</option>
+              <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option>
+              <option>Delhi</option><option>Goa</option><option>Gujarat</option>
+              <option>Haryana</option><option>Karnataka</option><option>Kerala</option>
+              <option>Madhya Pradesh</option><option>Maharashtra</option><option>Punjab</option>
+              <option>Rajasthan</option><option>Tamil Nadu</option><option>Telangana</option>
+              <option>Uttar Pradesh</option><option>West Bengal</option>
+            </select>
+          </div>
+          <div id="result-1" class="result-box hidden"></div>
+          <button type="submit" class="btn-gold w-full py-3 text-sm font-semibold">Run Eligibility Agent →</button>
+        </form>
+      </div>
+
+      <div id="panel-2" class="sim-panel hidden">
+        <div class="panel-header">
+          <div class="panel-badge">AGENT 02</div>
+          <h4 class="font-serif text-2xl font-bold text-white">Identity Verification</h4>
+          <p class="text-gray-400 text-sm mt-1">Verify your voter identity using ID, OTP, and face scan</p>
+        </div>
+        <form id="form-identity" class="panel-body space-y-5" novalidate>
+          <div class="form-group">
+            <label for="voter-id" class="form-label">Voter ID <span class="text-gold">*</span></label>
+            <input type="text" id="voter-id" name="voterId" placeholder="e.g. DL1234567" class="form-input" aria-required="true"/>
+            <span class="form-hint">Minimum 5 characters</span>
+          </div>
+          <div class="form-group">
+            <label for="otp" class="form-label">One-Time Password (OTP) <span class="text-gold">*</span></label>
+            <div class="flex gap-3">
+              <input type="text" id="otp" name="otp" placeholder="Enter 6-digit OTP" maxlength="6" class="form-input flex-1" aria-required="true"/>
+              <button type="button" id="send-otp-btn" class="btn-outline text-xs px-4 whitespace-nowrap" onclick="simulateSendOTP()">Send OTP</button>
+            </div>
+            <span class="form-hint" id="otp-hint">Click "Send OTP" to receive a simulated code</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Face Verification</label>
+            <div class="face-verify-box" id="face-box" role="button" tabindex="0" aria-label="Click to simulate face scan" onclick="toggleFaceVerify()" onkeypress="if(event.key==='Enter') toggleFaceVerify()">
+              <div id="face-icon" class="text-4xl mb-2">👤</div>
+              <p id="face-text" class="text-sm text-gray-400">Click to simulate face scan</p>
+              <div id="face-scan-line" class="scan-line hidden"></div>
+            </div>
+          </div>
+          <div id="result-2" class="result-box hidden"></div>
+          <button type="submit" class="btn-gold w-full py-3 text-sm font-semibold">Run Identity Agent →</button>
+        </form>
+      </div>
+
+      <div id="panel-3" class="sim-panel hidden">
+        <div class="panel-header">
+          <div class="panel-badge">AGENT 03</div>
+          <h4 class="font-serif text-2xl font-bold text-white">Fraud Detection Analysis</h4>
+          <p class="text-gray-400 text-sm mt-1">AI-powered fraud pattern analysis on your profile</p>
+        </div>
+        <form id="form-fraud" class="panel-body space-y-5" novalidate>
+          <div class="form-group">
+            <label for="full-name" class="form-label">Full Name <span class="text-gold">*</span></label>
+            <input type="text" id="full-name" name="name" placeholder="As per Voter ID" class="form-input" aria-required="true"/>
+          </div>
+          <div class="form-group">
+            <label for="dob" class="form-label">Date of Birth <span class="text-gold">*</span></label>
+            <input type="date" id="dob" name="dob" class="form-input" aria-required="true"/>
+          </div>
+          <div class="form-group">
+            <label for="fraud-state" class="form-label">State (for cross-check) <span class="text-gold">*</span></label>
+            <select id="fraud-state" name="state" class="form-input" aria-required="true">
+              <option value="">— Select State —</option>
+              <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option>
+              <option>Delhi</option><option>Goa</option><option>Gujarat</option>
+              <option>Haryana</option><option>Karnataka</option><option>Kerala</option>
+              <option>Madhya Pradesh</option><option>Maharashtra</option><option>Punjab</option>
+              <option>Rajasthan</option><option>Tamil Nadu</option><option>Telangana</option>
+              <option>Uttar Pradesh</option><option>West Bengal</option>
+            </select>
+          </div>
+          <div id="fraud-analysis" class="fraud-analysis-box hidden"></div>
+          <div id="result-3" class="result-box hidden"></div>
+          <button type="submit" class="btn-gold w-full py-3 text-sm font-semibold">Run Fraud Detection Agent →</button>
+        </form>
+      </div>
+
+      <div id="panel-4" class="sim-panel hidden">
+        <div class="panel-header">
+          <div class="panel-badge">AGENT 04</div>
+          <h4 class="font-serif text-2xl font-bold text-white">Electronic Voting Machine</h4>
+          <p class="text-gray-400 text-sm mt-1">All agents verified. Cast your simulated vote below.</p>
+        </div>
+        <div class="panel-body">
+          <div id="evm-machine">
+            <div class="evm-header">
+              <p class="text-xs text-gold uppercase tracking-widest font-semibold">SIMULATED CONSTITUENCY — DEMO DISTRICT</p>
+              <h5 class="font-serif text-xl font-bold text-white mt-1">General Election 2029 (Simulation)</h5>
+            </div>
+            <div class="candidate-list" id="candidate-list">
+              <div class="candidate-row" data-candidate="Rajesh Kumar - Progressive Democratic Party" onclick="selectCandidate(this)">
+                <div class="candidate-symbol">🌿</div>
+                <div class="candidate-info">
+                  <p class="candidate-name">Rajesh Kumar</p>
+                  <p class="candidate-party">Progressive Democratic Party</p>
+                </div>
+                <div class="candidate-select-dot"></div>
+              </div>
+              <div class="candidate-row" data-candidate="Priya Sharma - National Unity Front" onclick="selectCandidate(this)">
+                <div class="candidate-symbol">⭐</div>
+                <div class="candidate-info">
+                  <p class="candidate-name">Priya Sharma</p>
+                  <p class="candidate-party">National Unity Front</p>
+                </div>
+                <div class="candidate-select-dot"></div>
+              </div>
+              <div class="candidate-row" data-candidate="Arun Patel - Citizens Alliance" onclick="selectCandidate(this)">
+                <div class="candidate-symbol">🏵️</div>
+                <div class="candidate-info">
+                  <p class="candidate-name">Arun Patel</p>
+                  <p class="candidate-party">Citizens Alliance</p>
+                </div>
+                <div class="candidate-select-dot"></div>
+              </div>
+              <div class="candidate-row nota-row" data-candidate="NOTA - None of the Above" onclick="selectCandidate(this)">
+                <div class="candidate-symbol">✖</div>
+                <div class="candidate-info">
+                  <p class="candidate-name">NOTA</p>
+                  <p class="candidate-party">None of the Above</p>
+                </div>
+                <div class="candidate-select-dot"></div>
+              </div>
+            </div>
+            <div class="evm-footer">
+              <p class="text-xs text-gray-500 mb-4">Selected: <span id="selected-display" class="text-gold font-semibold">None</span></p>
+              <button id="cast-vote-btn" class="btn-gold w-full py-3 text-sm font-semibold" onclick="castVote()">🗳️ Cast Vote</button>
+            </div>
+          </div>
+          <div id="vote-success" class="hidden">
+            <div class="receipt-card">
+              <div class="receipt-icon">✅</div>
+              <h5 class="font-serif text-2xl font-bold text-white mb-2">Vote Recorded!</h5>
+              <p class="text-gray-400 text-sm mb-6">Your simulated vote has been securely recorded.</p>
+              <div class="receipt-details" id="receipt-details"></div>
+              <p class="text-xs text-gray-500 mt-6 italic">This is a simulation. No real vote has been cast.</p>
+              <button onclick="resetSimulation()" class="btn-outline mt-6 px-6 py-2 text-sm">Start New Simulation</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-blocked" class="sim-panel hidden">
+        <div class="panel-body text-center py-12">
+          <div class="text-6xl mb-4">🚫</div>
+          <h4 class="font-serif text-2xl font-bold text-red-400 mb-3">Access Denied</h4>
+          <p class="text-gray-400 mb-2" id="blocked-msg">One or more agents rejected your application.</p>
+          <div id="blocked-detail" class="result-box mt-4 text-left"></div>
+          <button onclick="resetSimulation()" class="btn-outline mt-6 px-6 py-2 text-sm">Try Again</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY AWARENESS -->
+  <section id="security" class="py-24 bg-navy-dark">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-3">Cybersecurity Awareness</p>
+        <h3 class="font-serif text-4xl font-bold text-white">Risks in Remote Voting</h3>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="risk-card">
+          <div class="risk-icon">🎭</div>
+          <h5 class="font-serif text-xl font-bold text-white mb-3">Identity Fraud</h5>
+          <p class="text-gray-400 text-sm leading-relaxed">Impersonation using stolen Voter IDs, deepfake biometrics, and forged credentials are primary threats in remote voting environments.</p>
+        </div>
+        <div class="risk-card">
+          <div class="risk-icon">💻</div>
+          <h5 class="font-serif text-xl font-bold text-white mb-3">Cybersecurity Threats</h5>
+          <p class="text-gray-400 text-sm leading-relaxed">Man-in-the-middle attacks, DDoS on voting servers, SQL injection, and session hijacking can compromise election integrity.</p>
+        </div>
+        <div class="risk-card">
+          <div class="risk-icon">⚠️</div>
+          <h5 class="font-serif text-xl font-bold text-white mb-3">Coercion Risks</h5>
+          <p class="text-gray-400 text-sm leading-relaxed">Remote voting removes ballot secrecy. Voters may be coerced by employers, family, or criminal groups to vote in a certain way.</p>
+        </div>
+      </div>
+      <div class="disclaimer-box mt-16">
+        <p class="text-gold font-semibold text-sm mb-2">⚖️ Official Disclaimer</p>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          <strong>This is a simulation. Real remote voting is not currently implemented in India.</strong> The Election Commission of India uses physical EVMs and VVPATs at designated polling booths. This prototype is for educational and research purposes only. No actual votes are cast or recorded.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CIVIC CONNECT MODULE — Safe Voter Interaction System
+       ADD-ON: Isolated from voting pipeline. Access gated by
+       Identity Verification Agent success.
+       ══════════════════════════════════════════════════════════ -->
+  <section id="civic-connect-section" aria-label="Civic Connect: Safe Voter Interaction System">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Module Header -->
+      <div class="cc-module-header">
+        <div class="cc-module-badge">Add-On Module · Civic Awareness</div>
+        <h3 class="font-serif text-4xl font-bold text-white">Civic Connect</h3>
+        <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-sm leading-relaxed">
+          Discuss public issues with other voters in a safe and structured environment.
+        </p>
+        <p class="cc-disclaimer" role="note">
+          ℹ️ This feature is for awareness only and does <strong>not</strong> influence voting decisions.
+        </p>
+      </div>
+
+      <!-- Main Card -->
+      <div class="cc-card" role="region" aria-label="Civic Connect interaction panel">
+
+        <!-- Card Header -->
+        <div class="cc-card-header">
+          <div class="cc-card-icon" aria-hidden="true">🏛️</div>
+          <div>
+            <p class="cc-card-title">Voter Interaction Portal</p>
+            <p class="cc-card-subtitle">Structured civic conversations · No free-text input · Issue-focused only</p>
+          </div>
+        </div>
+
+        <!-- ── STATE 1: LOCKED (Identity not yet verified) ── -->
+        <div id="cc-locked" role="alert" aria-live="polite">
+          <div class="cc-lock-icon" aria-hidden="true">🔒</div>
+          <h4 class="cc-lock-title">Identity Verification Required</h4>
+          <p class="cc-lock-desc">
+            Civic Connect is available only to identity-verified voters. Complete the voting simulation up to Agent 02 to unlock this feature.
+          </p>
+          <div class="cc-lock-steps" aria-label="Steps to unlock Civic Connect">
+            <div class="cc-lock-step">
+              <span class="cc-lock-step-num">1</span>
+              Complete <strong style="color:var(--white);margin-left:4px">Eligibility Check</strong>
+            </div>
+            <div class="cc-lock-step">
+              <span class="cc-lock-step-num">2</span>
+              Pass <strong style="color:var(--white);margin-left:4px">Identity Verification (Agent 02)</strong>
+            </div>
+            <div class="cc-lock-step">
+              <span class="cc-lock-step-num">3</span>
+              Return here — Civic Connect unlocks automatically
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STATE 2: TOPIC SELECTION ── -->
+        <div id="cc-topic-select" class="cc-hidden">
+          <p class="cc-section-title">Select a civic topic you'd like to discuss:</p>
+          <div class="cc-topic-grid" role="group" aria-label="Civic topic selection">
+            <button class="cc-topic-card" data-topic="Jobs"
+              onclick="selectTopic('Jobs')" aria-label="Select Jobs as topic">
+              <div class="cc-topic-emoji" aria-hidden="true">💼</div>
+              <div>
+                <div class="cc-topic-name">Jobs</div>
+                <div class="cc-topic-desc">Employment &amp; livelihoods</div>
+              </div>
+            </button>
+            <button class="cc-topic-card" data-topic="Education"
+              onclick="selectTopic('Education')" aria-label="Select Education as topic">
+              <div class="cc-topic-emoji" aria-hidden="true">📚</div>
+              <div>
+                <div class="cc-topic-name">Education</div>
+                <div class="cc-topic-desc">Schools, literacy &amp; skills</div>
+              </div>
+            </button>
+            <button class="cc-topic-card" data-topic="Infrastructure"
+              onclick="selectTopic('Infrastructure')" aria-label="Select Infrastructure as topic">
+              <div class="cc-topic-emoji" aria-hidden="true">🏗️</div>
+              <div>
+                <div class="cc-topic-name">Infrastructure</div>
+                <div class="cc-topic-desc">Roads, power &amp; water</div>
+              </div>
+            </button>
+            <button class="cc-topic-card" data-topic="Safety"
+              onclick="selectTopic('Safety')" aria-label="Select Safety as topic">
+              <div class="cc-topic-emoji" aria-hidden="true">🛡️</div>
+              <div>
+                <div class="cc-topic-name">Safety</div>
+                <div class="cc-topic-desc">Security &amp; public welfare</div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Match notice (shown after selection) -->
+          <div id="cc-match-notice" class="cc-match-notice cc-hidden" role="status" aria-live="polite"></div>
+        </div>
+
+        <!-- ── STATE 3: STRUCTURED CHAT ── -->
+        <div id="cc-chat" class="cc-hidden">
+          <!-- Chat header -->
+          <div class="cc-chat-header">
+            <button class="cc-chat-back" onclick="resetCivicConnect()" aria-label="Back to topic selection">
+              ← Change topic
+            </button>
+            <span class="cc-chat-topic-pill" id="cc-chat-topic-label" aria-live="polite"></span>
+          </div>
+
+          <!-- Conversation log -->
+          <div class="cc-chat-log" id="cc-chat-log" role="log" aria-label="Civic conversation log" aria-live="polite"></div>
+
+          <!-- Pre-set message options (NO free text) -->
+          <div class="cc-msg-selector-label" id="cc-msg-selector-heading">Choose a message to send:</div>
+          <div class="cc-msg-options" role="group" aria-labelledby="cc-msg-selector-heading">
+
+            <button class="cc-msg-btn" onclick="sendMessage('ask-1')"
+              aria-label="Ask: What issues are most important in your area?">
+              <span class="cc-msg-btn-icon" aria-hidden="true">❓</span>
+              <div class="cc-msg-btn-content">
+                <div class="cc-msg-btn-type">Ask Question</div>
+                <div class="cc-msg-btn-text">What issues are most important in your area?</div>
+              </div>
+            </button>
+
+            <button class="cc-msg-btn" onclick="sendMessage('concern-1')"
+              aria-label="Share concern: In my area, employment is a major concern.">
+              <span class="cc-msg-btn-icon" aria-hidden="true">⚠️</span>
+              <div class="cc-msg-btn-content">
+                <div class="cc-msg-btn-type">Share Concern</div>
+                <div class="cc-msg-btn-text">In my area, employment is a major concern.</div>
+              </div>
+            </button>
+
+            <button class="cc-msg-btn" onclick="sendMessage('opinion-1')"
+              aria-label="Share opinion: Public infrastructure needs improvement.">
+              <span class="cc-msg-btn-icon" aria-hidden="true">💬</span>
+              <div class="cc-msg-btn-content">
+                <div class="cc-msg-btn-type">General Opinion</div>
+                <div class="cc-msg-btn-text">Public infrastructure needs improvement.</div>
+              </div>
+            </button>
+
+          </div>
+
+          <!-- Insights trigger (shown after min exchanges) -->
+          <div id="cc-insights-trigger" class="cc-hidden">
+            <button class="btn-gold text-xs px-6 py-2" onclick="showInsights()"
+              aria-label="View civic insights panel">
+              📊 View Civic Insights
+            </button>
+          </div>
+        </div>
+
+        <!-- ── STATE 4: INSIGHTS PANEL ── -->
+        <div id="cc-insights" class="cc-hidden">
+          <div class="cc-insights-header">
+            <h4 class="font-serif text-xl font-bold text-white">Civic Insights</h4>
+            <button class="cc-chat-back" onclick="resetCivicConnect()" aria-label="Start a new civic conversation">
+              ← New conversation
+            </button>
+          </div>
+
+          <!-- Summary cards -->
+          <div class="cc-insight-cards">
+            <div class="cc-insight-card">
+              <div class="cc-insight-card-label">Top Discussed Issue</div>
+              <div class="cc-insight-card-value" id="cc-insight-top">—</div>
+            </div>
+            <div class="cc-insight-card">
+              <div class="cc-insight-card-label">Common Concerns Among Users</div>
+              <div class="cc-insight-card-value sm" id="cc-insight-concerns">—</div>
+            </div>
+          </div>
+
+          <!-- Bar chart -->
+          <p class="cc-chart-title">Discussion Volume by Topic</p>
+          <div id="cc-insight-bars" aria-label="Bar chart of civic topic discussion volumes"></div>
+
+          <p style="font-size:11px;color:var(--gray-600);margin-top:20px;text-align:center">
+            Data shown is simulated. No real user data is collected or stored.
+          </p>
+        </div>
+
+      </div><!-- /cc-card -->
+    </div>
+  </section>
+  <!-- /CIVIC CONNECT MODULE -->
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-800 py-10">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p class="text-gray-500 text-xs">© 2029 SecureVote Simulator · Educational Prototype · Not affiliated with the Election Commission of India</p>
+      <p class="text-gray-600 text-xs mt-2">Built as a Multi-Agent System demonstration. No real voting functionality.</p>
+    </div>
+  </footer>
+
+  <script src="agents.js"></script>
+  <script src="app.js"></script>
+  <script src="civic-connect.js"></script>
+  <script>
+    // ── Wire up chat topic pill dynamically when chat opens ──
+    const _origSelectTopic = selectTopic;
+    window.selectTopic = function(topic) {
+      _origSelectTopic(topic);
+      const pill = document.getElementById('cc-chat-topic-label');
+      if (pill) pill.textContent = '🗣️ ' + topic;
+    };
+  </script>
+</body>
+</html>
